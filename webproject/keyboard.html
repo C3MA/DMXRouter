@@ -1,0 +1,145 @@
+<html lang="en">
+	<head>
+		<script type="text/javascript">
+
+			var combinedValue = 20;
+
+			function btnClicked(value) {
+				newCombinedValue = 10 * combinedValue + value;
+				if(newCombinedValue <= 255) {
+					combinedValue = newCombinedValue;
+					displayValue();
+				};
+			}
+
+			function btnFixedValueClicked(value) {
+				combinedValue = value;
+				displayValue();
+			}
+
+			function btnEnterClicked() {
+				//setChannelsValue(combinedValue);
+				//sendDmxForAllChannels();
+				parent.keyboardEnter(combinedValue);
+			}
+
+			function btnClearClicked() {
+				combinedValue = 0;
+				displayValue();
+			}
+
+			function displayValue() {
+				var myDiv1 = document.getElementById("out1");
+				myDiv1.innerHTML = combinedValue;
+			}
+
+			window.onload = function() {
+				//makeTable();
+				displayValue();
+			}
+			
+			
+			
+			
+		</script>
+		<style type="text/css">
+			.buttonStyle {
+				padding: 0;
+				margin: 0;
+				width: 80px;
+				height: 60px;
+				border: 1px solid #333333;
+				background-color: #FF9900;
+				color: #000000;
+				font-size: 22px;
+			}
+			.buttonStyle:active {
+				position: relative;
+				top: 1px;
+				background-color: #FF4950;
+			}
+			
+			.keyboardOutputStyle {
+				padding: 0;
+				margin: 5px;				
+				font-size: 22px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<table>			
+			<tr>
+				<td>
+					
+				</td>
+				<td>
+					<div id="out1" class="keyboardOutputStyle"></div>
+					<table id="keyboard">
+						<colgroup>
+							<col>
+							<col>
+							<col>
+						</colgroup>
+						<tr>
+							<td>
+							<input type="button" onclick="btnClearClicked()" value="Clear" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnFixedValueClicked(255)" value="Full" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="" value="" class="buttonStyle"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<input type="button" onclick="btnClicked(7);" value="7" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(8)" value="8" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(9)" value="9" class="buttonStyle"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<input type="button" onclick="btnClicked(4)" value="4" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(5)" value="5" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(6)" value="6" class="buttonStyle"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<input type="button" onclick="btnClicked(1)" value="1" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(2)" value="2" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(3)" value="3" class="buttonStyle"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							<input type="button" onclick="" value="" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnClicked(0)" value="0" class="buttonStyle"/>
+							</td>
+							<td>
+							<input type="button" onclick="btnEnterClicked()" value="Enter" class="buttonStyle"/>
+							</td>
+						</tr>
+					</table>
+				</td>					
+			</tr>
+		</table>
+
+	</body>
+</html>

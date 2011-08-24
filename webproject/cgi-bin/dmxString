@@ -1,0 +1,12 @@
+#!/bin/sh
+#cgi script das die qss led an- bzw. ausschaltet
+#ip/cgi-bin/dmx?value=100&channel=1     setzt channel 1 auf Valse 100
+
+
+#den value aus den get parametern auslesen
+VALUE=`echo "$QUERY_STRING" | grep -oE "(^|[?&])value=[^&]+" |  sed "s/%20/ /g" | cut -f 2 -d "=" | head -n1`
+
+#ausgabe der eingegebenen parameter
+echo value: $VALUE
+
+echo $VALUE > /dev/ttyS0

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+	<head>	
+		<script src="dmx.js" type="text/javascript"></script>
+		<script type="text/javascript">
+				
+			/*
+			function fromParent(){
+				
+			}
+				
+			function testCallIntoKeyboard(){
+				//var frmKeyb = document.getElementById('frmKeyboard');
+				//var docu  = frmKeyb.contentDocument;
+				//docu.fromParent();
+				
+				window.frames.frmKeyboard.fromParent();
+			}
+			*/
+				
+			function keyboardEnter(value){
+				//alert("keyboardEnter " + value);
+				setChannelsValue(value);
+				sendDmxForAllChannels();
+			}
+			
+			
+			window.onload = function() {
+				makeTable();
+				//displayValue();
+			}
+			
+			var channels = new Array();
+
+			function sendDmxForAllChannels(){
+				for (var i=0; i < channels.length; i++) {			  
+				  var channel = getButtonChannel(channels[i]);
+				  var value = getButtonValue(channels[i]);
+				  setChannelToValue(channel, value);
+				};
+			}
+
+
+			function setChannelsValue(value){
+				for (var i=0; i < channels.length; i++) {			  
+				  if(isButtonToggled(channels[i])){
+				  		setButtonValue(channels[i], value);
+						//alert(channels[i].name);
+					}
+				};
+			}
+
+			function setButtonValue(btn, value){
+				var div = btn.children[1];
+				div.innerHTML = value;
+			}
+			
+			function getButtonValue(btn){
+				var div = btn.children[1];
+				return div.innerHTML;				
+			}
+			
+			function getButtonChannel(btn){
+				var div = btn.children[0];
+				return div.innerHTML;				
+			}
+
+			function isButtonToggled(btn){
+				if (btn.style.color == "red") {
+					return true;
+				};
+				return false;
+			}
+
+			function toggleButton(btn){
+				if(btn.style.color == "red") {
+					btn.style.color = "black";
+				}else{
+					btn.style.color = "red";
+				}
+			}
+
+			function channelButtonClicked(e) {
+				var btn = e.currentTarget;
+				toggleButton(btn);
+				//var name = btn.name;
+			}
+
+			function makeTable() {
+				row = new Array();
+				cell = new Array();
+
+				var count = 1;
+				row_num = 8;
+				//edit this value to suit
+				cell_num = 8;
+				//edit this value to suit
+
+				//create the table
+				tab = document.createElement('table');
+				tab.setAttribute('id', 'newtable');
+
+				//create the table body??
+				tbo = document.createElement('tbody');
+
+				//create the rows and columns
+				for( c = 0; c < row_num; c++) {
+					row[c] = document.createElement('tr');
+
+					//create the cells
+					for( k = 0; k < cell_num; k++) {
+
+						cell[k] = document.createElement('td');
+
+						//create and fill the content of the cell
+						//TODO create button with tag an class
+						btn = document.createElement("BUTTON");
+						
+						//create the content
+						divText = document.createElement("div");
+						divText.appendChild(document.createTextNode(count));
+						//divText.id ="divText";
+						
+						divValue = document.createElement("div");
+						divValue.appendChild(document.createTextNode("0"));
+						//divValue.id ="divValue";
+						
+						//theText2=document.createTextNode("000");
+						btn.appendChild(divText);
+						btn.appendChild(divValue);
+						
+						btn.name = count;
+						btn.style.color = "black";
+						btn.style.width = "50px";
+						btn.style.height = "50px";
+
+						btn.onclick = channelButtonClicked;
+						channels.push(btn);
+						
+						cell[k].appendChild(btn);
+						count++;
+
+						//add the cell to the row
+						row[c].appendChild(cell[k]);
+					}
+					//add the complete row to the table body
+					tbo.appendChild(row[c]);
+				}
+				//add the tablebody to the table
+				tab.appendChild(tbo);
+				//add the table to the document
+				document.getElementById('channelsTable').appendChild(tab);
+			}
+			
+		</script>
+		<style type="text/css">
+			.frameStyle{
+				border: 1px solid #333333;
+				background-color: #DDDDDD;
+			}
+		</style>
+	</head>
+	<body>
+		<table>			
+			<tr>
+				<td>
+					<div id="channelsTable"></div>
+				</td>
+				<td>
+					<iframe class="frameStyle" src="keyboard.html" name="frmKeyboard" height="380" width="280">
+						Hier sollte ein Keyboard erscheinen.
+					</iframe>
+				</td>					
+			</tr>
+		</table>
+		<a href="index.html">DMXRouter</a>
+	</body>
+</html>
