@@ -1,12 +1,67 @@
 <html lang="en">
 	<head>
 		<script src="dmx.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+				
+			function allOn(){
+				
+				for (var i=1; i < 70; i++) {
+					valueString = "oy" + i + "c" + "255" + "w";
+					sendValueString(valueString);  	
+				};
+			}
+			
+			function allOff(){
+				
+				for (var i=1; i < 70; i++) {
+					valueString = "oy" + i + "c" + "0" + "w";
+					sendValueString(valueString);	  	
+				};
+			}
+			
+			function allRed(){
+				
+				for (var i=1; i < 70; i+=4) {
+					valueString = "oy" + i + "c" + "255" + "w";
+					sendValueString(valueString);	  	
+				};
+			}
+			
+			function allBlue(){
+				
+				for (var i=3; i < 70; i+=4) {
+					valueString = "oy" + i + "c" + "255" + "w";
+					sendValueString(valueString);	  	
+				};
+			}
+			
+			function allGreen(){
+				
+				for (var i=2; i < 70; i+=4) {
+					valueString = "oy" + i + "c" + "255" + "w";
+					sendValueString(valueString);
+				};
+			}
+			
+			function sendValueString(valueString){
+				doIt(this, null, "../cgi-bin/dmxString?value=" + valueString);
+			}
+			
+		</script>
+		
 	</head>
 	<body>
 		<div>
-            <input type="button" onclick="doIt(this,event,'../cgi-bin/dmxString?value=oy1c255w');" value="Red On"/>
-            <input type="button" onclick="doIt(this,event,'../cgi-bin/dmxString?value=oy1c0w');" value="Red Off"/>
+            <input type="button" onclick="allOn();" value="All Max"/>
+            <input type="button" onclick="allOff();" value="All Off"/>
         </div>
+        <div>
+            <input type="button" onclick="allRed();" value="All Red"/>
+            <input type="button" onclick="allGreen();" value="All Green"/>
+            <input type="button" onclick="allBlue();" value="All Blue"/>
+        </div>
+        <br/>
         <div>
         	<a href="index.html">DMXRouter</a>
         </div>
