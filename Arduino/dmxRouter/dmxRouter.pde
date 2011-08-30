@@ -1,18 +1,15 @@
-/* This program allows you to set DMX channels over the serial port.
+/* this programm converts serial input to dmx output
+** oy1c255w - sets dmx channel 1 to value 255
+** oy240c30w - sets dmx channel 240 to value 30
 **
-** After uploading to Arduino, switch to Serial Monitor and set the baud rate
-** to 9600. You can then set DMX channels using these commands:
+** op111bbb111 - op marks the start of block of data that gets sent as dmx.
+** every byte after op gets set as value for a channel 
 **
-** <number>c : Select DMX channel
-** <number>v : Set DMX channel to new value
-**
-** These can be combined. For example:
-** 100c355w : Set channel 100 to value 255.
-**
-** For more details, and compatible Processing sketch,
-** visit http://code.google.com/p/tinkerit/wiki/SerialToDmx
-**
-** Help and support: http://groups.google.com/group/dmxsimple       */
+** uses serial input with 115200 baud
+** 
+** DmxSimple is used to send dmx
+** http://code.google.com/p/tinkerit/wiki/DmxSimple
+*/
 
 #include <DmxSimple.h>
 
