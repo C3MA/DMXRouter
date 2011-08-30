@@ -2,6 +2,7 @@
 #cgi script das die qss led an- bzw. ausschaltet
 #ip/cgi-bin/dmx?value=100&channel=1     setzt channel 1 auf Valse 100
 
+SERIALDEVICE=/dev/ttyUSB0
 
 #den value aus den get parametern auslesen
 VALUE=`echo "$QUERY_STRING" | grep -oE "(^|[?&])value=[^&]+" |  sed "s/%20/ /g" | cut -f 2 -d "=" | head -n1`
@@ -13,6 +14,7 @@ echo channel: $CHANNEL
 
 echo 'oy'$CHANNEL'c'$VALUE'w'
 
-
-#echo ''$CHANNEL'c'$VALUE'w' | nc localhost 2001 ;
-echo 'oy'$CHANNEL'c'$VALUE'w' > /dev/ttyS0
+if [ -e $SERIALDEVICE ]
+then
+  echo 'oy'$CHANNEL'c'$VALUE'w' > $SERIALDEVICE
+fi
