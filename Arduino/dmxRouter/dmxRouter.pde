@@ -16,11 +16,17 @@
 
 #include <DmxSimple.h>
 
+//#define DEBUGOUT
+
 void setup() {
   Serial.begin(115200);
- 
   
+  //choose the pin to use as output for dmx
+  DmxSimple.usePin(4);
+  
+#ifdef DEBUGOUT  
   //Serial.println("booted");
+#endif
 }
 
 int value = 0;
@@ -43,23 +49,30 @@ void loop() {
   byte1 = byte2;
   byte2 = (byte)c;
   
-  /*Serial.print("byte1:");
+#ifdef DEBUGOUT  
+  Serial.print("byte1:");
   Serial.println((int)byte1);
   Serial.print("byte2:");
-  Serial.println((int)byte2);*/
-  
+  Serial.println((int)byte2);
+#endif
   //reset channel when 
   if(byte1 == 'o' && byte2 == 'p')
   {    
     channel = 0;
+#ifdef DEBUGOUT
     Serial.println("reset channel");
+#endif
     return;    
   }else if(byte1 == 'o' && byte2 == 'y')
   {    
+#ifdef DEBUGOUT
     Serial.println("enter single channel mode");
+#endif
     readbytes = 0;
     readSingleChannel();
+#ifdef DEBUGOUT
     Serial.println("exit single channel");
+#endif
     return;
   }
   else if(byte1 == 'o' && byte2 == 'o')
@@ -76,21 +89,23 @@ void loop() {
   //check if the channel is to big or already invalid
   if(channel > 512 || channel == -1){
     channel = -1;
-   //Serial.println("max channel reached");
+#ifdef DEBUGOUT
+    Serial.println("max channel reached");
+#endif
     return;
   }
   
   channel++;
 
-  /*Serial.print("channel:");
+#ifdef DEBUGOUT
+  Serial.print("channel:");
   Serial.println((int)channel);  
   Serial.print("value:");
   Serial.println((int)byte2);
-  */
+#endif  
   
   DmxSimple.write(channel, byte2);
 }
-
 
 
 
@@ -110,7 +125,6 @@ void readSingleChannel(){
       if (c=='c') channel = value;
       else if (c=='w') {
         DmxSimple.write(channel, value);
-        Serial.println();
         return;
       }
       value = 0;
