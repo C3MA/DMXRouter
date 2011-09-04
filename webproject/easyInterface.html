@@ -4,6 +4,47 @@
 		
 		<script type="text/javascript">
 				
+			function GetRandom( min, max ) {
+				if( min > max ) {
+					return( -1 );
+				}
+				if( min == max ) {
+					return( min );
+				}
+			 
+			        return( min + parseInt( Math.random() * ( max-min+1 ) ) );
+			}
+				
+			function testanimation(){
+				
+				com = new Array();
+				com.push(getDmxStringForLightBox(0,255,0,0));
+				com.push(500);
+				com.push(getDmxStringForLightBox(1,0,255,0));
+				com.push(500);
+				com.push(getDmxStringForLightBox(2,0,0,255));
+				com.push(500);
+				com.push(getDmxStringForLightBox(0,0,0,0));
+				com.push(500);
+				com.push(getDmxStringForLightBox(1,0,0,0));
+				com.push(500);
+				com.push(getDmxStringForLightBox(2,0,0,0));				
+				//com.reverse();
+	
+				startAnimation(com);
+			}	
+			
+			function testanimation2(){
+				com = new Array();
+				
+				for (var i=1; i < 16; i++) {
+					com.push(getDmxStringForLightBox(i,GetRandom(0,255),0,0));
+					com.push(GetRandom(10,1000));
+				};
+				
+				startAnimation(com);
+			}
+				
 			function allOn(){
 				
 				for (var i=1; i < 70; i++) {
@@ -45,7 +86,8 @@
 			}
 			
 			function sendValueString(valueString){
-				doIt(this, null, "../cgi-bin/dmxString?value=" + valueString);
+				doIt(this, null, "http://10.23.42.104/cgi-bin/dmxString?value=" + valueString);
+				//doIt(this, null, "../cgi-bin/dmxString?value=" + valueString);
 			}
 			
 		</script>
@@ -59,9 +101,14 @@
         <div>
             <input type="button" onclick="allRed();" value="All Red"/>
             <input type="button" onclick="allGreen();" value="All Green"/>
-            <input type="button" onclick="allBlue();" value="All Blue"/>
+            <input type="button" onclick="allBlue();" value="All Blue"/>            
         </div>
         <br/>
+        <div>
+        	<input type="button" onclick="testanimation();" value="TestAnimation"/>
+        	<input type="button" onclick="testanimation2();" value="TestAnimation"/>
+        	<input type="button" onclick="stopAnimation();" value="StopAnimation"/>
+        </div
         <div>
         	<a href="index.html">DMXRouter</a>
         </div>

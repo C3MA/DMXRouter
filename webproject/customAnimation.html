@@ -1,0 +1,57 @@
+<html lang="en">
+	<head>
+		<!--TODO die dmx datei noch remote einbinden -->
+		<script src="http://10.23.42.104/dmx.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+				
+			var remoteDMXStringCGIUrl = "http://10.23.42.104/cgi-bin/dmxString?value="
+				
+			function startBlinkAnimation(){
+				
+				//TODO noch die url als optionalen parameter an die startanimation übergeben
+				
+				//erzeugt ein neues Array in dem die Animation abgelegt wird
+				var com = new Array();
+				//fügt einen Befehl in das Array hinzu
+				//die lightbox mit der id 0 wird auf RGB 255,0,0 gesetzt
+				com.push(getDmxStringForLightBox(0,255,0,0));
+				//fügt einen Pausebefehl ein
+				//es wird 500ms pausiert
+				com.push(500);
+				//die lightbox mit der id 0 wird auf RGB 0,0,0 gesetzt
+				com.push(getDmxStringForLightBox(0,0,0,0));
+				//es wird 500ms pausiert
+				com.push(500);
+	
+				//das array mit der fertigen animation wird gestartet und endlos wiederholt
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+		</script>
+		
+	</head>
+	<body>
+		<div>
+			Eigene Animationen zu erstellen ist ganz einfach. 
+			Es werden nur ein Webbrowser und ein Texteditor benoetigt.
+			<ol>	
+			  <li>Speichere diese HTML-Seite lokal auf deinem Rechner. (Rechtsklick irgendwo -> Seite speichern unter)</li>
+			  <li>Oeffne die gespeicherte Webseite mit einem Texteditor</li>
+			  <li>Modifiziere den Javascript-Code der vorhandenen Animation (speichern nicht vergessen)</li>
+			  <li>Oeffne die lokal gespeicherte und modifizierte Webseite mit deinem Webbrowser</li>
+			  <li>Klicke auf den "Start Blinking" Knopf auf der Webseite</li>
+			  <li>goto Schritt 3</li>
+			</ol>	
+        </div>
+        <br/>
+        <div>
+        	<input type="button" onclick="startBlinkAnimation();" value="Start Blinking"/>
+        	<!--stopt die laufende Animation. (Ruft eine Funktion der dmx.js auf)-->
+        	<input type="button" onclick="stopAnimation();" value="StopAnimations"/>
+        </div
+        <div>
+        	<a href="index.html">DMXRouter</a>
+        </div>
+	</body>
+</html>

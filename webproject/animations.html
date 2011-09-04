@@ -1,0 +1,247 @@
+<html lang="en">
+	<head>
+		<!--TODO die dmx datei noch remote einbinden -->
+		<script src="dmx.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+				
+			var remoteDMXStringCGIUrl = "http://10.23.42.104/cgi-bin/dmxString?value="
+				
+			 
+				
+			function startColumnBlinkAnimation(){
+				
+				var delay = 700;
+				
+				var com = new Array();
+				
+				com.push(getDmxStringForColum(0,255,0,0));				
+				com.push(delay);
+							
+				com.push(getDmxStringForColum(0,0,0,0));
+				com.push(delay);
+				
+				com.push(getDmxStringForColum(1,255,0,0));
+				com.push(delay);
+				
+				com.push(getDmxStringForColum(1,0,0,0));
+				com.push(delay);
+	
+				com.push(getDmxStringForColum(2,255,0,0));
+				com.push(delay);
+				
+				com.push(getDmxStringForColum(2,0,0,0));
+				com.push(delay);
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+			function startRowBlinkAnimation(){
+				var com = new Array();
+				var delay = 300;
+				var delay2 = 20;
+				
+				
+				for (var i=0; i < 5; i++) {
+				  com.push(getDmxStringForRow(i,255,0,0));
+				  com.push(delay);
+				  com.push(getDmxStringForRow(i,0,0,0));
+				  com.push(delay2);
+				};
+				
+				for (var i=0; i < 5; i++) {
+				  com.push(getDmxStringForRow(i,0,255,0));
+				  com.push(delay);
+				  com.push(getDmxStringForRow(i,0,0,0));
+				  com.push(delay2);
+				};
+				
+				for (var i=0; i < 5; i++) {
+				  com.push(getDmxStringForRow(i,0,0,255));
+				  com.push(delay);
+				  com.push(getDmxStringForRow(i,0,0,0));
+				  com.push(delay2);
+				};
+				
+				for (var i=0; i < 3; i++) {
+				  com.push(getDmxStringForColum(i,255,0,0));
+				  com.push(delay);
+				  com.push(getDmxStringForColum(i,0,0,0));
+				  com.push(delay2);
+				};
+				
+				for (var i=0; i < 3; i++) {
+				  com.push(getDmxStringForColum(i,0,255,0));
+				  com.push(delay);
+				  com.push(getDmxStringForColum(i,0,0,0));
+				  com.push(delay2);
+				};
+				
+				for (var i=0; i < 3; i++) {
+				  com.push(getDmxStringForColum(i,0,0,255));
+				  com.push(delay);
+				  com.push(getDmxStringForColum(i,0,0,0));
+				  com.push(delay2);
+				};
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+			function start01Animation(){
+				var com = new Array();
+				var delay = 200;
+								
+				//alles rot
+				com.push(getDmxStringForColum(0,255,0,0));
+				com.push(delay);
+				com.push(getDmxStringForColum(1,255,0,0));
+				com.push(delay);
+				com.push(getDmxStringForColum(2,255,0,0));
+				com.push(delay);
+				
+				com.push(getDmxStringForColum(0,0,0,255));
+				com.push(delay);
+				
+				com.push(getDmxStringForColum(0,255,0,0));
+				com.push(delay);
+				com.push(getDmxStringForColum(1,0,0,255));
+				com.push(delay);
+				
+				//com.push(getDmxStringForColum(1,255,0,0));
+				com.push(getDmxStringForColum(2,0,0,255));
+				com.push(delay);
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+			function start02Animation(){
+				var com = new Array();
+				var delay = 200;
+				
+				var lboxes = getLightboxWallArray();
+				
+				for (var row=0; row < 5; row++) {
+				  for (var column=0; column < 3; column++) {
+					var box = lboxes[column][row];
+					com.push(getDmxStringForLightBox(box,200,0,0));
+					com.push(delay);
+				  };
+				};
+				
+				for (var row=0; row < 5; row++) {
+				  for (var column=0; column < 3; column++) {
+					var box = lboxes[column][row];
+					com.push(getDmxStringForLightBox(box,200,255,0));
+					com.push(delay);
+				  };
+				};
+				
+				for (var row=0; row < 5; row++) {
+				  for (var column=0; column < 3; column++) {
+					var box = lboxes[column][row];
+					com.push(getDmxStringForLightBox(box,0,200,255));
+					com.push(delay);
+				  };
+				};
+				
+				for (var row=0; row < 5; row++) {
+				  for (var column=0; column < 3; column++) {
+					var box = lboxes[column][row];
+					com.push(getDmxStringForLightBox(box,0,0,255));
+					com.push(delay);
+				  };
+				};
+				
+				for (var row=0; row < 5; row++) {
+				  for (var column=0; column < 3; column++) {
+					var box = lboxes[column][row];
+					com.push(getDmxStringForLightBox(box,255,0,255));
+					com.push(delay);
+				  };
+				};
+				
+				for (var row=0; row < 5; row++) {
+				  for (var column=0; column < 3; column++) {
+					var box = lboxes[column][row];
+					com.push(getDmxStringForLightBox(box,0,255,0));
+					com.push(delay);
+				  };
+				};
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+			function start03Animation(){
+				var com = new Array();
+				var delay = 50;
+				
+				var lboxes = getLightboxWallArray();
+				
+				com.push(getDmxStringForColum(0,0,0,0));
+				com.push(100);
+				com.push(getDmxStringForColum(0,255,0,0));
+				com.push(100);
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+			function start04Animation(){
+				var com = new Array();
+				var delay = 50;
+				
+				var lboxes = getLightboxWallArray();
+				
+				com.push(getDmxStringForColum(1,0,0,0));
+				com.push(100);
+				com.push(getDmxStringForColum(1,255,0,0));
+				com.push(100);
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+			function start05Animation(){
+				var com = new Array();
+				var delay = 50;
+				
+				var lboxes = getLightboxWallArray();
+				
+				com.push(getDmxStringForColum(2,0,0,0));
+				com.push(100);
+				com.push(getDmxStringForColum(2,255,0,0));
+				com.push(100);
+				
+				//startAnimation(com);
+				startAnimationRemote(com, remoteDMXStringCGIUrl);
+			}
+			
+		</script>
+		
+	</head>
+	<body>
+        <div>
+        	<input type="button" onclick="startColumnBlinkAnimation();" value="Start Column Blinking"/>
+        	</br>
+        	<input type="button" onclick="startRowBlinkAnimation();" value="Start Row Blinking"/>
+        	</br>
+        	<input type="button" onclick="start01Animation();" value="01"/>
+        	</br>
+        	<input type="button" onclick="start02Animation();" value="02"/>
+        	</br>
+        	<input type="button" onclick="start03Animation();" value="R1 03"/>
+        	<input type="button" onclick="start04Animation();" value="R2 04"/>
+        	<input type="button" onclick="start05Animation();" value="R3 05"/>
+        	</br>
+        	<!--stopt die laufende Animation. (Ruft eine Funktion der dmx.js auf)-->
+        	<input type="button" onclick="stopAnimation();" value="StopAnimations"/>
+        </div
+        <div>
+        	<a href="index.html">DMXRouter</a>
+        </div>
+	</body>
+</html>
